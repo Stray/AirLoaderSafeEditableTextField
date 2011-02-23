@@ -164,20 +164,20 @@ package stray.text {
 		private function change_shouldnt_fire(e:Event):void
 		{
 			// no problem
-		}
+		} 
 		
-		
- 		public function test_keycodes():void {
-			var keyChild:Sprite= new Sprite();
-			addChild(keyChild);
-			keyChild.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-		}                                                            
-		
-		protected function keyDownHandler(e:KeyboardEvent):void
-		{
-			trace(e.toString());
-		}
-		
+	   	public function test_redispatches_change_from_child():void {
+	   		var handler:Function = addAsync(check_redispatches_change_from_child, 50);
+	   		instance.addEventListener(Event.CHANGE, handler);
+	   		
+	   		subjectTextField.dispatchEvent(new Event(Event.CHANGE));
+	   	}
+
+	   	private function check_redispatches_change_from_child(e:Event):void {
+	   		assertEquals('event is correct type', Event.CHANGE, e.type);
+	   		
+	   	}
+	   	
 		
 	}
 }

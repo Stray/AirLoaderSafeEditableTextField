@@ -18,6 +18,7 @@ package stray.text {
 		
 		public function APITextField(subjectTextField:TextField) {
 			_subjectTextField = subjectTextField;
+			_subjectTextField.addEventListener(Event.CHANGE, dispatchChange);
 			_currentIndex = 0;   
 			_restrict = "";
 			createKeyCodeActionReference();
@@ -60,13 +61,14 @@ package stray.text {
 		
 		public function acceptCharAndKeyCodes(charCode:int, keyCode:int):void
 		{
-			if(charCode != 0)
+			trace("APITextField::acceptCharAndKeyCodes()", charCode, keyCode);
+			if((charCode == 0)||(charCode == 8))
 			{
-				acceptCharCode(charCode);
+				acceptKeyCode(keyCode);
 			}                           
 			else
 			{
-				acceptKeyCode(keyCode);
+				acceptCharCode(charCode);
 			}
 		}
 
@@ -91,6 +93,7 @@ package stray.text {
 		
 		protected function backspace():void
 		{
+			trace("APITextField::backspace()");
 			if(_currentIndex > 0)
 			{
 				var textWas:Array = text.split("");  
@@ -137,7 +140,7 @@ package stray.text {
 			return true;
 		}
 		
-		protected function dispatchChange():void
+		protected function dispatchChange(e:Event = null):void
 		{
 			dispatchEvent(new Event(Event.CHANGE));
 		}
