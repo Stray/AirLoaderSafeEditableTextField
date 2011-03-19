@@ -20,12 +20,15 @@ package stray.text {
 		override protected function setUp():void {
 			super.setUp();                              
 			subjectTextField = new TextField();
+			addChild(subjectTextField);
 			instance = new APITextField(subjectTextField);
+			instance.fakeCursor = true;
 		}
 
 		override protected function tearDown():void {
 			super.tearDown();
-			instance = null;
+			instance = null;           
+			removeChild(subjectTextField);
 		}
 
 		public function testInstantiated():void {
@@ -34,6 +37,32 @@ package stray.text {
 
 		public function testFailure():void {
 			assertTrue("Failing test", true);
+		}
+		
+		public function test_verified_visually():void { 
+			var localTextField:TextField = new TextField();
+			                                             
+			localTextField.x = 300;
+			localTextField.y = 30;
+			localTextField.textColor = 0xFFFFFF;
+			addChild(localTextField);       
+			
+			var keyRelayer:Sprite = new Sprite();
+			addChild(keyRelayer);         
+			                                         
+			var localInstance:APITextField = new APITextField(localTextField);
+
+			var relayKeyPress:Function = function(e:KeyboardEvent):void 
+				{ 
+					trace("e: " + e.toString());
+					localInstance.acceptCharAndKeyCodes(e.charCode, e.keyCode); 
+				}   
+				
+			keyRelayer.stage.addEventListener(KeyboardEvent.KEY_DOWN, relayKeyPress); 
+			localInstance.fakeCursor = true; 
+			localInstance.text = "some text";
+			assertTrue("Verified visually", true);
+			removeChild(localTextField);
 		}     
 		
 		public function test_adding_charCodes_only():void {
@@ -177,7 +206,6 @@ package stray.text {
 	   		assertEquals('event is correct type', Event.CHANGE, e.type);
 	   		
 	   	}
-	   	
 		
 	}
 }

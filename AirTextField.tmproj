@@ -40,28 +40,28 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>28</integer>
+				<integer>58</integer>
 				<key>line</key>
-				<integer>141</integer>
+				<integer>151</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>144</integer>
 		</dict>
 		<key>test/stray/text/APITextFieldTest.as</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>52</integer>
+				<integer>3</integer>
 				<key>line</key>
-				<integer>85</integer>
+				<integer>27</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>18</integer>
+			<integer>20</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
